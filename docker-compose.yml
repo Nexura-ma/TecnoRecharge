@@ -1,0 +1,60 @@
+services:
+  # 1. SERVICE BASE DE DONNÉES (PostgreSQL)
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password@2026
+      POSTGRES_DB: digit_ecom
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d digit_ecom"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. SERVICE BACKEND (NestJS)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Chaîne de connexion pour TypeORM/Prisma
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: admin
+      DATABASE_PASSWORD: password@2026
+      DATABASE_NAME: digit_ecom
+      DATABASE_URL: postgresql://admin:password%402026@postgres:5432/digit_ecom
+      JWT_SECRET: super_secret_key_change_me
+
+  # 3. SERVICE FRONTEND (React)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      # Autoriser React à communiquer avec le Backend (optionnel)
+      VITE_API_URL: http://localhost:3000
+
+volumes:
+  postgres_data:
