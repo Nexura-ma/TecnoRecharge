@@ -1,4 +1,3 @@
-# /frontend/Dockerfile
 FROM node:20-alpine
 
 WORKDIR /app
@@ -8,8 +7,8 @@ RUN npm install
 
 COPY . .
 
-# Exposer le port du frontend (Vite utilise 5173 par défaut)
+# Expose port 5173
 EXPOSE 5173
 
-# Démarrer l’application avec l’hôte 0.0.0.0 pour l’accès Docker
-CMD ["npm", "run", "dev", "--", "--host"]
+# Start Next.js in development mode
+CMD ["npm", "run", "dev"]

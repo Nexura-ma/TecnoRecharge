@@ -1,5 +1,7 @@
+'use client';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { register } from '../api/auth.api';
 
 export default function Register() {
@@ -13,7 +15,7 @@ export default function Register() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleNext = () => {
     // Here you could add validation for the first step
@@ -45,7 +47,7 @@ export default function Register() {
       const { confirmPassword, ...registerData } = formData;
       const data = await register(registerData);
       localStorage.setItem('token', data.access_token);
-      navigate('/');
+      router.push('/');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred during registration');
     } finally {
@@ -199,7 +201,7 @@ export default function Register() {
                   <div className="mt-8 text-center">
                     <p className="text-sm text-slate-600">
                       Already have an account?{' '}
-                      <Link to="/login" className="font-medium text-blue-600 hover:underline">
+                      <Link href="/login" className="font-medium text-blue-600 hover:underline">
                         Sign In
                       </Link>
                     </p>

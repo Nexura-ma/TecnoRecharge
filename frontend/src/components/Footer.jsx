@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,11 +24,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6 text-white border-b-2 border-yellow-400 inline-block">Categories</h4>
             <ul className="space-y-4 text-slate-400">
-              <li><Link to="/games" className="hover:text-yellow-400 transition-colors">Video Games</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Mobile Top-Up</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Gift Cards</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Entertainment</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Online Services</Link></li>
+              <li><Link href="/games" className="hover:text-yellow-400 transition-colors">Video Games</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Mobile Top-Up</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Gift Cards</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Entertainment</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Online Services</Link></li>
             </ul>
           </div>
 
@@ -36,11 +36,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6 text-white border-b-2 border-yellow-400 inline-block">Legal</h4>
             <ul className="space-y-4 text-slate-400">
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Terms & Conditions</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Legal Mentions</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">Refund Policy</Link></li>
-              <li><Link to="#" className="hover:text-yellow-400 transition-colors">GDPR</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Terms & Conditions</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Legal Mentions</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Refund Policy</Link></li>
+              <li><Link href="#" className="hover:text-yellow-400 transition-colors">GDPR</Link></li>
             </ul>
           </div>
 

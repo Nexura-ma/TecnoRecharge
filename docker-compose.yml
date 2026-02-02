@@ -54,7 +54,7 @@ services:
       - /app/node_modules
     environment:
       # Autoriser React à communiquer avec le Backend (optionnel)
-      VITE_API_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: http://localhost:3000
 
 volumes:
   postgres_data:

@@ -1,5 +1,7 @@
+'use client';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { login } from '../api/auth.api';
 
 export default function Login() {
@@ -9,7 +11,7 @@ export default function Login() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,7 +27,7 @@ export default function Login() {
     try {
       const data = await login(formData);
       localStorage.setItem('token', data.access_token);
-      navigate('/');
+      router.push('/');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred during login');
     } finally {
@@ -131,7 +133,7 @@ export default function Login() {
           <div className="mt-8 text-center">
             <p className="text-sm text-slate-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-blue-600 hover:underline">
+              <Link href="/register" className="font-medium text-blue-600 hover:underline">
                 Create one now
               </Link>
             </p>
